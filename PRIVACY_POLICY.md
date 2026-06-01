@@ -106,9 +106,9 @@ If we make material changes to this privacy policy, we will update the "Last upd
 
 If you have any questions or concerns about this privacy policy, please contact:
 
-**[YOUR NAME / COMPANY NAME]**
-**[YOUR EMAIL ADDRESS]**
-**[YOUR WEBSITE OR GITHUB URL]**
+**Daiyan Nawar**
+**daiyannawar01@gmail.com**
+**github.com/wdl-dai**
 
 ---
 
