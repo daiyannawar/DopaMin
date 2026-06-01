@@ -1,4 +1,4 @@
-// background.js — Dopamine Restrictor Service Worker
+// background.js 
 
 // ─── Defaults ───────────────────────────────────────────────────────────────
 const DEFAULT_BUDGET_MINUTES = 15;
