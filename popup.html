@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DopaMin</title>
+  <style>
+    :root {
+      --font-display: 'Georgia', 'Times New Roman', serif;
+      --font-mono: 'Courier New', 'Courier', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: #222222;
+      --text: #f0ede6;
+      --muted: #666666;
+      --accent: #e8ff47;
+      --red: #ff4545;
+      --green: #47ff8a;
+    }
+
+    body {
+      width: 280px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .popup-logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .popup-status {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+    }
+
+    .popup-status.active { color: var(--green); border-color: var(--green); }
+    .popup-status.blocked { color: var(--red); border-color: var(--red); }
+
+    .divider { height: 1px; background: var(--border); }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+    }
+
+    .stat-row .label { color: var(--muted); }
+    .stat-row .value { color: var(--text); }
+
+    .bar-wrap {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+
+    .today-label {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .btn-options {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 2px;
+      width: 100%;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-options:hover { color: var(--text); border-color: var(--muted); }
+
+    .why-block {
+      background: var(--surface);
+      border-left: 2px solid var(--accent);
+      padding: 10px 12px;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .why-block span { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <div class="popup-header">
+    <span class="popup-logo">DM</span>
+    <span class="popup-status" id="status-badge">LOADING</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <div>
+    <p class="today-label">TODAY'S BUDGET</p>
+    <div class="stat-row">
+      <span class="label">Used</span>
+      <span class="value" id="p-used">—</span>
+    </div>
+    <div class="stat-row">
+      <span class="label">Remaining</span>
+      <span class="value" id="p-left">—</span>
+    </div>
+  </div>
+
+  <div class="bar-wrap">
+    <div class="bar-fill" id="p-bar" style="width:0%"></div>
+  </div>
+
+  <div class="why-block" id="p-why" style="display:none">
+    Focus: <span id="p-why-text"></span>
+  </div>
+
+  <button class="btn-options" id="btn-options">⚙ Open Settings</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>
