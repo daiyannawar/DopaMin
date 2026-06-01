@@ -108,7 +108,7 @@ If you have any questions or concerns about this privacy policy, please contact:
 
 **Daiyan Nawar**\
 **daiyannawar01@gmail.com**\
-**github.com/wdl-dai**\
+**github.com/daiyannawar**\
 
 ---
 
