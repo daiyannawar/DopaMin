@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DopaMin — Setup</title>
+  <style>
+    :root {
+      --font-display: 'Georgia', 'Times New Roman', serif;
+      --font-mono: 'Courier New', 'Courier', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #161616;
+      --border: #222222;
+      --text: #f0ede6;
+      --muted: #555555;
+      --muted2: #888888;
+      --accent: #e8ff47;
+      --red: #ff4545;
+      --green: #47ff8a;
+      --font-display: 'Georgia', 'Times New Roman', serif;
+      --font-mono: 'Courier New', 'Courier', monospace;
+    }
+
+    html { background: var(--bg); color: var(--text); font-family: var(--font-display); }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 20px 80px;
+    }
+
+    /* ── Header ── */
+    .page-header {
+      width: 100%;
+      max-width: 680px;
+      padding: 40px 0 48px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: var(--muted2);
+      text-transform: uppercase;
+    }
+
+    .page-title {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      font-family: var(--font-display);
+    }
+
+    .page-subtitle {
+      font-size: 15px;
+      color: var(--muted2);
+      font-style: italic;
+      margin-top: 6px;
+    }
+
+    /* ── Form ── */
+    .form-body {
+      width: 100%;
+      max-width: 680px;
+      padding-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .field-label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .label-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .label-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .label-desc {
+      font-size: 13px;
+      color: var(--muted2);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    textarea, input[type="text"], select {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      resize: vertical;
+    }
+
+    textarea:focus, input[type="text"]:focus, select:focus {
+      border-color: var(--muted2);
+    }
+
+    textarea { min-height: 80px; line-height: 1.6; }
+
+    /* ── Goals list ── */
+    .goals-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .goal-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .goal-row input {
+      flex: 1;
+    }
+
+    .btn-icon {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted2);
+      font-family: var(--font-mono);
+      font-size: 16px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .btn-icon:hover { color: var(--red); border-color: var(--red); }
+
+    .btn-add-goal {
+      background: none;
+      border: 1px dashed var(--border);
+      color: var(--muted2);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-radius: 2px;
+      text-align: left;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-add-goal:hover { color: var(--text); border-color: var(--muted2); border-style: solid; }
+
+    /* ── Slop list ── */
+    .slop-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .slop-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 6px 10px 6px 12px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted2);
+    }
+
+    .slop-tag-remove {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      padding: 0 2px;
+      transition: color 0.2s;
+    }
+
+    .slop-tag-remove:hover { color: var(--red); }
+
+    .slop-add-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .slop-add-row input { flex: 1; }
+
+    .btn-secondary {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted2);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      padding: 0 16px;
+      cursor: pointer;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-secondary:hover { color: var(--text); border-color: var(--muted2); }
+
+    /* ── Budget select ── */
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23555'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    /* ── Save ── */
+    .save-bar {
+      padding-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-save {
+      background: var(--accent);
+      border: none;
+      color: #0a0a0a;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-save:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-save:active { transform: translateY(0); }
+
+    .save-msg {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--green);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .save-msg.visible { opacity: 1; }
+
+    /* ── Divider ── */
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Status block ── */
+    .status-block {
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 20px 24px;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .status-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--muted2);
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--muted2);
+    }
+
+    .status-row span:last-child {
+      color: var(--text);
+    }
+
+    .status-bar-wrap {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .status-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    .btn-reset {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted2);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      padding: 8px 14px;
+      cursor: pointer;
+      border-radius: 2px;
+      width: fit-content;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-reset:hover { color: var(--red); border-color: var(--red); }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <span class="logo">DopaMin · Setup</span>
+    <h1 class="page-title">Turn potential into results.</h1>
+    <p class="page-subtitle">Configure what matters — and what's off limits.</p>
+  </header>
+
+  <div class="form-body">
+
+    <!-- WHY -->
+    <div class="field-group">
+      <div class="field-label">
+        <span class="label-tag">01 — Your Why</span>
+        <span class="label-name">What are you working towards?</span>
+        <span class="label-desc">One sentence. This will stare back at you every time you try to slack off.</span>
+      </div>
+      <textarea id="input-why" maxlength="280" placeholder="e.g. Pass my accounting exams by June, build my startup to £10k MRR, get to 10% body fat."></textarea>
+    </div>
+
+    <!-- GOALS -->
+    <div class="field-group">
+      <div class="field-label">
+        <span class="label-tag">02 — Goals</span>
+        <span class="label-name">Your specific goals</span>
+        <span class="label-desc">These appear on the block screen and are what you'll type to unlock. Make them concrete.</span>
+      </div>
+      <div class="goals-list" id="goals-list"></div>
+      <button class="btn-add-goal" id="btn-add-goal">+ Add goal</button>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- SLOP LIST -->
+    <div class="field-group">
+      <div class="field-label">
+        <span class="label-tag">03 — The Slop List</span>
+        <span class="label-name">Sites you waste time on</span>
+        <span class="label-desc">Add any URL fragment (e.g. "youtube.com/shorts"). Time on these sites counts against your budget.</span>
+      </div>
+      <div class="slop-grid" id="slop-grid"></div>
+      <div class="slop-add-row">
+        <input type="text" id="input-slop-new" placeholder="e.g. reddit.com/r/all" />
+        <button class="btn-secondary" id="btn-add-slop">Add site</button>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- BUDGET -->
+    <div class="field-group">
+      <div class="field-label">
+        <span class="label-tag">04 — Daily Budget</span>
+        <span class="label-name">Time allowance per day</span>
+        <span class="label-desc">Once this runs out, the block activates until midnight. Choose honestly.</span>
+      </div>
+      <select id="input-budget">
+        <option value="5">5 minutes — Monk mode</option>
+        <option value="10">10 minutes — Disciplined</option>
+        <option value="15" selected>15 minutes — Balanced</option>
+        <option value="30">30 minutes — Light touch</option>
+      </select>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- TODAY'S STATUS -->
+    <div class="field-group">
+      <div class="field-label">
+        <span class="label-tag">05 — Today's Usage</span>
+        <span class="label-name">Budget status</span>
+      </div>
+      <div class="status-block">
+        <span class="status-title">CURRENT SESSION</span>
+        <div class="status-row">
+          <span>Time used today</span>
+          <span id="stat-used">—</span>
+        </div>
+        <div class="status-row">
+          <span>Budget</span>
+          <span id="stat-budget">—</span>
+        </div>
+        <div class="status-bar-wrap">
+          <div class="status-bar-fill" id="stat-bar" style="width:0%"></div>
+        </div>
+        <div class="status-row">
+          <span>Bonus time earned</span>
+          <span id="stat-bonus">—</span>
+        </div>
+        <button class="btn-reset" id="btn-reset-today">↺ Reset today's usage</button>
+      </div>
+    </div>
+
+    <!-- SAVE -->
+    <div class="save-bar">
+      <button class="btn-save" id="btn-save">Save Settings</button>
+      <span class="save-msg" id="save-msg">✓ Saved.</span>
+    </div>
+
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
